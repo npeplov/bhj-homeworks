@@ -26,14 +26,8 @@ function countDown() {
         clearInterval(timerId);
         alert("Вы победили в конкурсе!");
     }
-
-    // console.log(j.getHours(), j.getMinutes(), j.getSeconds());
+    // По окончании отсчёта времени, запустите загрузку произвольного файла.
+    location.href="https://files.scene.org/get:nl-ftp/demos/groups/farbrausch/fr08_final.zip"
 }
 
 let timerId = setInterval( countDown, 20 );
-
-// 01:05:44 получить textcontent, 
-// присвоить объекту класса Date
-
-// 2. 01:05:44 преобразовать в get hours , mins, secs
-// 3. вычесть 1000 мс
