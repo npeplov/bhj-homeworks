@@ -8,7 +8,7 @@ function closeMenus() {
     }
 }
 
-function changeSubMenuStatus(liHaveUl) {
+function changeSubmenuStatus(liHaveUl) {
     // если был клик на открытом меню, то просто закрыть его и завершить выполнение обработчика события.
     if (liHaveUl.classList.contains("menu_active")) 
         liHaveUl.classList.remove("menu_active");
@@ -28,7 +28,7 @@ for (let i = 0; i < liQuantity; i++) {
         liHaveUl = parentLi.getElementsByTagName("ul")[0];
 
         if (liHaveUl) {
-            changeSubMenuStatus(liHaveUl);
+            changeSubmenuStatus(liHaveUl);
             // Запрещайте переход по ссылке для тех, что имеют вложенное меню
             return false;
         }

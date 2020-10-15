@@ -1,33 +1,33 @@
 const buttons = document.getElementsByClassName("slider__arrow");
+const slidesArr = Array.from(document.querySelectorAll(".slider__items div"));
 
-const slidesArr = document.querySelectorAll(".slider__items div");
+function getActiveSlideIndex() {
+    const currentSlideIndex = slidesArr.findIndex( (elem) => 
+        elem.classList.contains("slider__item_active")
+    );
+
+    slidesArr[currentSlideIndex].classList.remove("slider__item_active");
+    return currentSlideIndex;
+}
 
 // prev
 buttons[0].onclick = () => {
-    
-    for (let i = slidesArr.length - 1; i < slidesArr.length; i--) {
-        if (slidesArr[i].className === "slider__item slider__item_active"){
 
-            slidesArr[i].className = "slider__item";
-            if (i  === 0)
-                i = slidesArr.length - 1;
+    let currentSlide = getActiveSlideIndex();
 
-            slidesArr[i-1].className = "slider__item slider__item_active";
-            break;
-        }
-    }
+    if (currentSlide === 0)
+        currentSlide = slidesArr.length;
+
+    slidesArr[currentSlide - 1].classList.add("slider__item_active");
 }
 
 // next
 buttons[1].onclick = () => {
-    // найти активный слайд
-    for (let i = 0; i < slidesArr.length; i++) {
-        if (slidesArr[i].className === "slider__item slider__item_active"){
-            slidesArr[i].className = "slider__item";
-            if ( (i + 1) === slidesArr.length)
-                i = -1;
-            slidesArr[i+1].className = "slider__item slider__item_active";
-            break;
-        }
-    }
+
+    let currentSlide = getActiveSlideIndex();
+
+    if (currentSlide === slidesArr.length - 1)
+        currentSlide = -1;
+
+    slidesArr[currentSlide + 1].classList.add("slider__item_active");
 }
