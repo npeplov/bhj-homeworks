@@ -1,5 +1,6 @@
 const timer = setInterval(adsRotate, 1000);
-function adsRotater() {
+
+function adsRotate() {
     let spans = document.querySelectorAll('.rotator__case');
     for (let i=0; i < spans.length; i++) {
 
