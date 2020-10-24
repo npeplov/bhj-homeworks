@@ -1,18 +1,13 @@
 const timer = setInterval(adsRotate, 1000);
+let index = 0;
 
-function adsRotate() {
-    let spans = document.querySelectorAll('.rotator__case');
-    for (let i=0; i < spans.length; i++) {
+function adsRotateSimple() {
+    const spans = document.querySelectorAll('.rotator__case');
+    spans[index].classList.toggle('rotator__case_active');
 
-        let next = i + 1;
-        if (i == spans.length - 1)
-            next = 0;
+    index++;
+    if (index === spans.length)
+        index = 0;
 
-        if (spans[i].classList.contains('rotator__case_active')) 
-        {
-            spans[i].classList.toggle('rotator__case_active');
-            spans[next].classList.toggle('rotator__case_active');
-            return;
-        }
-    }
+    spans[index].classList.toggle('rotator__case_active');
 }
