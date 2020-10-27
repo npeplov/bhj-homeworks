@@ -6,11 +6,6 @@ const messages = document.querySelector( '.chat-widget__messages' );
 let timerId;
 
 widget.addEventListener('click', showChat);
-
-input.addEventListener('input', () => {
-    console.log('input');
-})
-
 input.addEventListener('keydown', sendMessage);
 
 function robotAwakening() {
@@ -26,8 +21,6 @@ function showChat() {
 }
 
 function sendMessage(e) {
-    console.log('keydown');
-
     clearInterval(timerId);
 
     if (e.code == 'Enter' && input.value) {
@@ -69,17 +62,6 @@ function messageTemplate(text, client) {
 }
 
 function timeNow() {
-    // const today = new Date();
-    // let hours = today.getHours();
-    // let mins = today.getMinutes();
-
-    // if (hours < 10)
-    //     hours = '1' + hours;
-
-    // if (mins < 10)
-    //     mins = '1' + mins;
-
-    // return hours + ':' + mins;
     return new Date().toTimeString().slice(0, 5)
 }
 
