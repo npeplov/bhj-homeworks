@@ -1,6 +1,13 @@
 body {
   font-family: Arial;
 }
+.cart {
+  display: none;
+}
+.active {
+  display: block;
+}
+
 .cart__products {
   display: flex;
   justify-content: center;
