@@ -10,8 +10,18 @@ function upload(e) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/upload.php');
     xhr.send();
+    // console.log(xhr.upload);
+
+    // xhr.upload.onprogress = () => {
+    //     console.log(xhr.upload.onprogress);
+    // }
 
     xhr.onreadystatechange = function() {
+        xhr.onprogress = function(event) {
+            console.log( 'Получено с сервера ' + event.loaded + ' байт из ' + event.total );
+        }
+
+
         // не работает событие xhr.readyState == 1
         if (xhr.readyState == 1)
             console.log(xhr.readyState);
