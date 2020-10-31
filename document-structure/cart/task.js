@@ -3,6 +3,20 @@ const addButton = Array.from(document.querySelectorAll('.product__add'));
 let divCart = document.querySelector('.cart__products');
 const clearButton = document.querySelector('.cart__clearence button');
 const cartMainDiv = document.querySelector('.cart');
+let productsArr = {};
+
+productsArr = JSON.parse(localStorage.getItem('products'));
+
+// отрисовать товар в корзине
+cartMainDiv.className = "cart active";
+let div = document.createElement('div');
+div.className = "cart__product";
+
+for (key in productsArr) {
+    divCart.insertBefore(div, divCart.children[key]);
+    div.outerHTML = cartTemplate(1, productsArr[key].img, productsArr[key].quant);
+}
+
 
 clearButton.addEventListener('click', clearCart);
 
@@ -21,6 +35,8 @@ function clearCart() {
     divCart = document.createElement('div');
     divCart.className = "cart__products";
     cartMainDiv.insertBefore(divCart, cartMainDiv.children[1]);
+    productsArr = {};
+    localStorage.removeItem('products');
 }
 
 function changeQuant() {
@@ -42,7 +58,6 @@ function addToCart() {
     let quant = +this.parentElement.querySelector('.product__quantity-value').textContent;
 
     const cartItems = Array.from(divCart.querySelectorAll('.cart__product'));
-    let div = document.createElement('div');
 
     // Если товар уже имеется в корзине, 
     // проверить id уже существующих в корзине
@@ -60,9 +75,42 @@ function addToCart() {
         // 2. прибавить
         quant += +quantInCart;
     }
-    
-    div.innerHTML = cartTemplate(product.dataset.id, image.src, quant);
-    divCart.appendChild(div);
+    else {
+        div = document.createElement('div');
+        divCart.appendChild(div);
+    }
+
+    // эффект перемещения товара в корзину. 1. создание копии изображения
+    let dupImage = image.cloneNode(true);
+    dupImage.className = "cart__product-image dup";
+    product.insertBefore(dupImage, image);
+    dupImage.style.left = 10 + 'px';
+    dupImage.style.bottom = 10 + 'px';
+    const timerId = setInterval(movingImage, 20);
+    saveCart();
+
+    function movingImage() {
+        dupImage.style.left = parseInt(dupImage.style.left) + 30 + 'px';
+        dupImage.style.bottom = parseInt(dupImage.style.bottom) + 10 + 'px';
+        // без объявления dupImage.style.left и bottom не работает
+        if (parseInt(dupImage.style.bottom) > 180) {
+            drawItem();
+        }
+        // если добавить еще товар пока работает анимация то ругается так как товар еще не отрисован
+    }
+    function drawItem() {
+        clearInterval(timerId);
+        div.outerHTML = cartTemplate(product.dataset.id, image.src, quant);
+        dupImage.remove();
+    }
+
+    function saveCart() {
+        const img = image.src;
+        productsArr[product.dataset.id] = {img, quant};
+
+        var serialObj = JSON.stringify(productsArr)
+        localStorage.setItem('products', serialObj);
+    }
 }
 
 function cartTemplate(id, image, quant) {

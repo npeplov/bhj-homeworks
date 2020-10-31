@@ -6,6 +6,7 @@ body {
 }
 .active {
   display: block;
+  min-height: 144px;
 }
 
 .cart__products {
@@ -37,6 +38,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  position: relative;
 }
 .product__title {
   width: 100%;
@@ -95,4 +97,9 @@ body {
 
 .product-shadow {
   position: absolute;
+}
+.dup {
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
 }
