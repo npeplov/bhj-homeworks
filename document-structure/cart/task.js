@@ -7,14 +7,15 @@ let productsArr = {};
 
 if (localStorage.length > 0) {
     productsArr = JSON.parse(localStorage.getItem('products'));
+    console.log(productsArr);
     // отрисовать товар в корзине
     cartMainDiv.className = "cart active";
-    let div = document.createElement('div');
-    div.className = "cart__product";
 
     for (key in productsArr) {
-        divCart.insertBefore(div, divCart.children[key]);
-        div.outerHTML = cartTemplate(1, productsArr[key].img, productsArr[key].quant);
+        let div = document.createElement('div');
+        div.className = "cart__product";
+        divCart.insertBefore(div, divCart.children[1]);
+        div.outerHTML = cartTemplate(key, productsArr[key].img, productsArr[key].quant);
     }
 }
 
