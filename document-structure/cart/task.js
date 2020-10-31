@@ -5,18 +5,18 @@ const clearButton = document.querySelector('.cart__clearence button');
 const cartMainDiv = document.querySelector('.cart');
 let productsArr = {};
 
-productsArr = JSON.parse(localStorage.getItem('products'));
+if (localStorage.length > 0) {
+    productsArr = JSON.parse(localStorage.getItem('products'));
+    // отрисовать товар в корзине
+    cartMainDiv.className = "cart active";
+    let div = document.createElement('div');
+    div.className = "cart__product";
 
-// отрисовать товар в корзине
-cartMainDiv.className = "cart active";
-let div = document.createElement('div');
-div.className = "cart__product";
-
-for (key in productsArr) {
-    divCart.insertBefore(div, divCart.children[key]);
-    div.outerHTML = cartTemplate(1, productsArr[key].img, productsArr[key].quant);
+    for (key in productsArr) {
+        divCart.insertBefore(div, divCart.children[key]);
+        div.outerHTML = cartTemplate(1, productsArr[key].img, productsArr[key].quant);
+    }
 }
-
 
 clearButton.addEventListener('click', clearCart);
 
