@@ -16,9 +16,11 @@ addButton.forEach( (button) => {
 
 function clearCart() {
     // удалить объект divCart
+    cartMainDiv.classList.toggle('active');
     divCart.remove();
-    cartMainDiv.className = "cart";
     divCart = document.createElement('div');
+    divCart.className = "cart__products";
+    cartMainDiv.insertBefore(divCart, cartMainDiv.children[1]);
 }
 
 function changeQuant() {
