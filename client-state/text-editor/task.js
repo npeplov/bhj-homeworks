@@ -15,4 +15,5 @@ function save() {
 
 function clear() {
     text.value = '';
+    localStorage.removeItem('text-editor');
 }
