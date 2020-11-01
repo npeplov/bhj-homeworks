@@ -6,7 +6,7 @@ const user_idSpan = welcomeDiv.querySelector('span');
 document.addEventListener('DOMContentLoaded', checkLoggedBefore);
 
 function checkLoggedBefore() {
-    if (localStorage.auth.length > 0)
+    if (localStorage.auth)
         showWelcomeDiv(localStorage.auth);
 }
 
@@ -17,10 +17,7 @@ welcomeDiv.children[1].addEventListener('click', logout);
 
 function sendSigninRequest(e) {
     e.preventDefault();
-    let formData= new FormData(document.forms[0]);
-    formData.append('login', document.forms[0].elements[0].value);
-    formData.append('password', document.forms[0].elements[1].value);
-
+    const formData= new FormData(document.forms.signin__form);
     const xhr = new XMLHttpRequest();
 
     xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/auth.php');
